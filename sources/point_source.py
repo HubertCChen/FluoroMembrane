@@ -1,14 +1,26 @@
-from core.photon import Photon
+from sources.base_source import (
+    BaseSource
+)
 
-from sources.source import Source
+from core.photon import (
+    Photon
+)
+
+from core.vector import (
+    Vector
+)
 
 
-class PointSource(Source):
+class PointSource(BaseSource):
 
     def __init__(
+
         self,
+
         position,
+
         direction,
+
         wavelength
     ):
 
@@ -20,17 +32,23 @@ class PointSource(Source):
 
         self.wavelength = wavelength
 
+        self.next_id = 1
+
     def generate_photon(
-        self,
-        photon_id
+        self
     ):
 
-        return Photon(
-            photon_id=photon_id,
+        photon = Photon(
 
-            position=self.position.copy(),
+            photon_id=self.next_id,
 
-            direction=self.direction.copy(),
+            position=self.position,
+
+            direction=self.direction,
 
             wavelength=self.wavelength
         )
+
+        self.next_id += 1
+
+        return photon

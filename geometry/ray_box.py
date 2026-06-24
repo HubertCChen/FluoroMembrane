@@ -93,7 +93,7 @@ def next_boundary_interaction(
 
                 position=point,
 
-                interaction_type=InteractionType.BOUNDARY
+                interaction_type=InteractionType.BOUNDARY,
 
                 surface=surface,
 

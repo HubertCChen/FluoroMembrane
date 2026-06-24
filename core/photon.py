@@ -23,3 +23,8 @@ class Photon:
     reemissions: int = 0
 
     final_state: str | None = None
+
+    history: list | None = None
+
+    initial_position: Vector | None = None
+    initial_direction: Vector | None = None
