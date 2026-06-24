@@ -14,6 +14,10 @@ from core.interaction import (
     Interaction
 )
 
+from core.interaction_type import (
+    InteractionType
+)
+
 
 def next_boundary_interaction(
     film,
@@ -89,7 +93,7 @@ def next_boundary_interaction(
 
                 position=point,
 
-                interaction_type="BOUNDARY",
+                interaction_type=InteractionType.BOUNDARY
 
                 surface=surface,
 

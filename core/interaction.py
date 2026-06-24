@@ -2,6 +2,10 @@ from dataclasses import dataclass
 
 from core.vector import Vector
 
+from core.interaction_type import (
+    InteractionType
+)
+
 
 @dataclass
 class Interaction:
@@ -10,7 +14,7 @@ class Interaction:
 
     position: Vector
 
-    interaction_type: str
+    interaction_type: InteractionType
 
     surface: str | None = None
 

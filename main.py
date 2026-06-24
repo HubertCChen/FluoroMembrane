@@ -1,13 +1,47 @@
-from physics.absorption import (
-    sample_absorption_distance
+from core.vector import Vector
+from core.photon import Photon
+
+from materials.material import (
+    Material
 )
 
-for i in range(10):
+from physics.absorption_interaction import (
+    next_absorption_interaction
+)
 
-    distance = (
-        sample_absorption_distance(
-            10
-        )
+photon = Photon(
+
+    photon_id=1,
+
+    position=Vector(
+        0,
+        0,
+        0
+    ),
+
+    direction=Vector(
+        1,
+        0,
+        0
+    ),
+
+    wavelength=450
+)
+
+material = Material(
+
+    refractive_index=1.49,
+
+    mu_abs=10,
+
+    mu_scat=0
+)
+
+interaction = (
+    next_absorption_interaction(
+        photon,
+        material
     )
+)
 
-    print(distance)
+print(interaction)
