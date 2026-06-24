@@ -9,6 +9,14 @@ class Vector:
     y: float
     z: float
 
+    def copy(self):
+
+        return Vector(
+            self.x,
+            self.y,
+            self.z
+        )
+
     def magnitude(self):
         return math.sqrt(
             self.x**2 +
@@ -64,3 +72,22 @@ class Vector:
     def __rmul__(self, scalar):
 
         return self.__mul__(scalar)
+
+    def __neg__(self):
+
+        return Vector(
+            -self.x,
+            -self.y,
+            -self.z
+        )
+
+    def __truediv__(
+        self,
+        scalar
+    ):
+
+        return Vector(
+            self.x / scalar,
+            self.y / scalar,
+            self.z / scalar
+        )
