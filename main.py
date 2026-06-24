@@ -1,11 +1,37 @@
 from core.vector import Vector
+from core.photon import Photon
 
-position = Vector(0,0,0)
+from physics.propagation import propagate
 
-direction = Vector(0,0,1)
 
-step = 0.5
+photon = Photon(
+    photon_id=1,
 
-new_position = position + direction * step
+    position=Vector(
+        0.0,
+        0.0,
+        0.0
+    ),
 
-print(new_position)
+    direction=Vector(
+        0.0,
+        0.0,
+        1.0
+    ).normalize(),
+
+    wavelength=450
+)
+
+print("Initial position")
+print(photon.position)
+
+propagate(
+    photon,
+    0.001
+)
+
+print("After propagation")
+print(photon.position)
+
+print("Travel distance")
+print(photon.travel_distance)
