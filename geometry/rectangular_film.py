@@ -1,5 +1,9 @@
 from geometry.geometry import Geometry
 
+from geometry.boundary import (
+    distance_to_plane
+)
+
 
 class RectangularFilm(Geometry):
 
@@ -27,12 +31,78 @@ class RectangularFilm(Geometry):
             0 <= position.z <= self.thickness
         )
 
-    def classify_exit(self, position):
+    def nearest_boundary_distance(
+        self,
+        position,
+        direction
+    ):
 
-        if position.z < 0:
-            return "BOTTOM_EXIT"
+        candidates = [
 
-        if position.z > self.thickness:
-            return "TOP_EXIT"
+            (
+                distance_to_plane(
+                    position,
+                    direction,
+                    0,
+                    "x"
+                ),
+                "X_MIN"
+            ),
 
-        return "EDGE_EXIT"
+            (
+                distance_to_plane(
+                    position,
+                    direction,
+                    self.width,
+                    "x"
+                ),
+                "X_MAX"
+            ),
+
+            (
+                distance_to_plane(
+                    position,
+                    direction,
+                    0,
+                    "y"
+                ),
+                "Y_MIN"
+            ),
+
+            (
+                distance_to_plane(
+                    position,
+                    direction,
+                    self.length,
+                    "y"
+                ),
+                "Y_MAX"
+            ),
+
+            (
+                distance_to_plane(
+                    position,
+                    direction,
+                    0,
+                    "z"
+                ),
+                "BOTTOM"
+            ),
+
+            (
+                distance_to_plane(
+                    position,
+                    direction,
+                    self.thickness,
+                    "z"
+                ),
+                "TOP"
+            )
+
+        ]
+
+        return min(
+            candidates,
+            key=lambda item: item[0]
+        )
+

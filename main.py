@@ -1,37 +1,34 @@
 from core.vector import Vector
-from core.photon import Photon
 
-from physics.propagation import propagate
-
-
-photon = Photon(
-    photon_id=1,
-
-    position=Vector(
-        0.0,
-        0.0,
-        0.0
-    ),
-
-    direction=Vector(
-        0.0,
-        0.0,
-        1.0
-    ).normalize(),
-
-    wavelength=450
+from geometry.rectangular_film import (
+    RectangularFilm
 )
 
-print("Initial position")
-print(photon.position)
-
-propagate(
-    photon,
-    0.001
+film = RectangularFilm(
+    width=0.210,
+    length=0.297,
+    thickness=0.0004,
+    refractive_index=1.49
 )
 
-print("After propagation")
-print(photon.position)
+position = Vector(
+    0.100,
+    0.100,
+    0.0002
+)
 
-print("Travel distance")
-print(photon.travel_distance)
+direction = Vector(
+    0,
+    0,
+    1
+).normalize()
+
+distance, surface = (
+    film.nearest_boundary_distance(
+        position,
+        direction
+    )
+)
+
+print(distance)
+print(surface)
