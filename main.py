@@ -36,6 +36,10 @@ from config.simulation_config import (
     SimulationConfig
 )
 
+from config.physics_config import (
+    PhysicsConfig
+)
+
 
 # ==========================================
 # Geometry
@@ -66,10 +70,30 @@ material = Material(
     mu_scat=0
 )
 
+# ==========================================
+# Physics Configuration
+# ==========================================
+
+physics = PhysicsConfig(
+
+    absorption=True,
+
+    scattering=False,
+
+    fluorescence=False,
+
+    boundary_model="mirror",
+
+    scattering_model="isotropic"
+)
+
+
 
 # ==========================================
 # Output Configuration
 # ==========================================
+
+
 
 config = SimulationConfig(
 

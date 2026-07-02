@@ -15,6 +15,8 @@ class Simulation:
 
         material,
 
+        physics,
+
         observer
     ):
 
@@ -23,6 +25,8 @@ class Simulation:
         self.film = film
 
         self.material = material
+
+        self.physics = physics
 
         self.observer = observer
 
@@ -46,6 +50,8 @@ class Simulation:
                 self.film,
 
                 self.material,
+
+                self.physics,
 
                 self.observer
             )

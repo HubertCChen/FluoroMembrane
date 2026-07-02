@@ -8,39 +8,89 @@ from physics.absorption_interaction import (
 
 
 def next_interaction(
+
     photon,
+
     film,
-    material
+
+    material,
+
+    physics
 ):
 
+    interactions = []
+
+    #
+    # Boundary
+    #
+
     boundary = (
+
         next_boundary_interaction(
+
             film,
+
             photon.position,
+
             photon.direction
         )
     )
 
-    absorption = (
-        next_absorption_interaction(
-            photon,
-            material
+    if boundary is not None:
+
+        interactions.append(
+            boundary
         )
-    )
 
-    interactions = [
+    #
+    # Absorption
+    #
 
-        boundary,
-        absorption
+    if physics.absorption:
 
-    ]
+        absorption = (
 
-    interactions = [
-        i for i in interactions
-        if i is not None
-    ]
+            next_absorption_interaction(
+
+                photon,
+
+                material
+            )
+        )
+
+        if absorption is not None:
+
+            interactions.append(
+                absorption
+            )
+
+    #
+    # Future interactions
+    #
+
+    if physics.scattering:
+
+        pass
+
+    if physics.fluorescence:
+
+        pass
+
+    #
+    # No interactions
+    #
+
+    if len(interactions) == 0:
+
+        return None
+
+    #
+    # Return nearest interaction
+    #
 
     return min(
+
         interactions,
+
         key=lambda x: x.distance
     )

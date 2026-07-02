@@ -8,26 +8,39 @@ from physics.execute_interaction import (
 
 
 def run_photon(
+
     photon,
+
     film,
+
     material,
-    recorder,
+
+    physics,
+
+    observer,
+
     max_interactions=10000
 ):
 
     interaction_count = 0
 
-    recorder.initialize_photon(
+    observer.initialize_photon(
         photon
     )
 
     while photon.alive:
 
         interaction = (
+
             next_interaction(
+
                 photon,
+
                 film,
-                material
+
+                material,
+
+                physics
             )
         )
 
@@ -40,12 +53,16 @@ def run_photon(
             break
 
         execute_interaction(
+
             photon,
+
             interaction
         )
 
-        recorder.record_event(
+        observer.record_event(
+
             photon,
+
             interaction
         )
 
@@ -59,7 +76,7 @@ def run_photon(
 
             break
 
-    recorder.finalize_photon(
+    observer.finalize_photon(
         photon
     )
 
